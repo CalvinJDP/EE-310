@@ -24,8 +24,8 @@
 ;----------------
 ; PROGRAM INPUTS
 ;----------------
-measuredTempInput   equ 	35		; Input for measured from sensor
-refTempInput	    equ		25		; Input from user
+measuredTempInput   equ 	0		; Input for measured from sensor
+refTempInput	    equ		10		; Input from user
 
 ;----------------
 ; REGISTERS
@@ -52,13 +52,13 @@ DCmesTempC	    equ		0x72		; Used to store decimal value of Measured Temp
 ;----------------
 ; Main Program
 ;----------------
-	    PSECT absdata,abs,ovrld
+    PSECT absdata,abs,ovrld
 	    
-	    org 0
+    org 0
 	    
-	    GOTO START
+    GOTO START
 	    
-	    org 0020H
+    org 0020H
 
 START:
     
@@ -69,17 +69,20 @@ START:
     MOVLW   refTempInput
     MOVWF   refTempREG
     
-    MOVFF   measuredTempREG, WREG
     GOTO    TempCheck
     
 TempCheck:
+    MOVFF   measuredTempREG, WREG
+    
+    BTFSC   measuredTempREG, 7, 0
+    GOTO    LED_HOT
     
     CPFSEQ  refTempREG, 0
-    GOTO    NOTEQUAL
+    GOTO    NotEqual
     GOTO    LED_OFF
 
     
-NOTEQUAL:
+NotEqual:
     CPFSGT refTempREG,0
     GOTO   LED_COOL
     GOTO   LED_HOT

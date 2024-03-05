@@ -31,8 +31,7 @@ refTempInput	    equ		25		; Input from user
 ; REGISTERS
 ;----------------
 measuredTempREG	    equ 	20h		; Setting reg 20 to store measured temp
-refTempREG	    equ		21h		; Setting reg 21 to store reference temp
-	    
+refTempREG	    equ		21h		; Setting reg 21 to store reference temp	    
 
 
 ;----------------
@@ -63,7 +62,7 @@ DCmesTempC	    equ		0x72		; Used to store decimal value of Measured Temp
 
 START:
     
-    MOVLW   0b11111100
+    MOVLW   0b11111001
     MOVWF   TRISD, 0
     MOVLW   measuredTempInput
     MOVWF   measuredTempREG
@@ -71,9 +70,9 @@ START:
     MOVWF   refTempREG
     
     MOVFF   measuredTempREG, WREG
-    GOTO    PPTEMPCHECK
+    GOTO    TempCheck
     
-PPTEMPCHECK:
+TempCheck:
     
     CPFSEQ  refTempREG, 0
     GOTO    NOTEQUAL
@@ -88,17 +87,17 @@ NOTEQUAL:
     
     
 LED_HOT:
-    BSF     HEATER, 1 ; Set PORTD,2 (Heater LED)
-    GOTO    PPTEMPCHECK
+    BSF     HEATER
+    GOTO    TempCheck
     
 LED_COOL:
-    BSF     COOLER, 1 ; Set PORTD,1 (Cooling LED)
-    GOTO    PPTEMPCHECK
+    BSF	    COOLER
+    GOTO    TempCheck
     
 LED_OFF:
     BCF     COOLER, 0 ; Clear PORTD,1 (Cooling LED)
     BCF     HEATER, 0 ; Clear PORTD,2 (Heater LED)
-    GOTO    PPTEMPCHECK
+    GOTO    TempCheck
 
 
 	

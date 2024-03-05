@@ -30,8 +30,8 @@ refTempInput	    equ		25		; Input from user
 ;----------------
 ; REGISTERS
 ;----------------
-measuredTempREG	    equ 	0x20		; Setting reg 20 to store measured temp
-refTempREG	    equ		0x21		; Setting reg 21 to store reference temp
+measuredTempREG	    equ 	20h		; Setting reg 20 to store measured temp
+refTempREG	    equ		21h		; Setting reg 21 to store reference temp
 	    
 
 
@@ -53,16 +53,28 @@ DCmesTempC	    equ		0x72		; Used to store decimal value of Measured Temp
 ;----------------
 ; Main Program
 ;----------------
+	    PSECT absdata,abs,ovrld
+	    
 	    org 0
+	    
+	    GOTO START
+	    
+	    org 0020H
 
 START:
     
     MOVLW   0b11111100
     MOVWF   TRISD, 0
-    MOVFF   measuredTempInput, measuredTempREG
-    MOVFF   refTempInput,refTempREG
-    MOVFF   measuredTempREG, WREG		; Move contents of measuredTempREG to WREG
-
+    MOVLW   measuredTempInput
+    MOVWF   measuredTempREG
+    MOVLW   refTempInput
+    MOVWF   refTempREG
+    
+    MOVFF   measuredTempREG, WREG
+    GOTO    PPTEMPCHECK
+    
+PPTEMPCHECK:
+    
     CPFSEQ  refTempREG, 0
     GOTO    LED_OFF
     
@@ -74,24 +86,17 @@ START:
 
     
 LED_HOT:
-    ; Code for when the temperature is hot
-    ; Example: Turn on the hot air blower LED
-    BSF     HEATER, 0 ; Set PORTD,2 (Heater LED)
-    BCF     COOLER, 1 ; Clear PORTD,1 (Cooling LED)
-    GOTO    START ; Jump to the end of LED control
+    BSF     HEATER, 1 ; Set PORTD,2 (Heater LED)
+    GOTO    PPTEMPCHECK
     
 LED_COOL:
-    ; Code for when the temperature is cool
-    ; Example: Turn on the cooling fan LED
-    BSF     COOLER, 0 ; Set PORTD,1 (Cooling LED)
-    BCF     HEATER, 1 ; Clear PORTD,2 (Heater LED)
-    GOTO    START ; Jump to the end of LED control
+    BSF     COOLER, 1 ; Set PORTD,1 (Cooling LED)
+    GOTO    PPTEMPCHECK
     
 LED_OFF:
-    ; Code for when the temperature is at the desired level
-    ; Example: Turn off both LEDs
     BCF     COOLER, 0 ; Clear PORTD,1 (Cooling LED)
     BCF     HEATER, 0 ; Clear PORTD,2 (Heater LED)
-    GOTO    START
+    GOTO    PPTEMPCHECK
+
 
 	

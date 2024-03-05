@@ -24,7 +24,7 @@
 ;----------------
 ; PROGRAM INPUTS
 ;----------------
-measuredTempInput   equ 	45		; Input for measured from sensor
+measuredTempInput   equ 	35		; Input for measured from sensor
 refTempInput	    equ		25		; Input from user
 
 ;----------------
@@ -46,8 +46,8 @@ DCmesTempA	    equ		0x70		; Used to store decimal value of Measured Temp
 DCmesTempB	    equ		0x71		; Used to store decimal value of Measured Temp
 DCmesTempC	    equ		0x72		; Used to store decimal value of Measured Temp
     
-#define		    HEATER      PORTD,2		; Sets PORTD 2 to the heater LED
-#define		    COOLER	PORTD,1		; Sets PORTD 1 to the coller LED
+#define		    HEATER      PORTD,1		; Sets PORTD 2 to the heater LED
+#define		    COOLER	PORTD,2		; Sets PORTD 1 to the coller LED
 	   
 	   
 ;----------------
@@ -76,14 +76,16 @@ START:
 PPTEMPCHECK:
     
     CPFSEQ  refTempREG, 0
+    GOTO    NOTEQUAL
     GOTO    LED_OFF
+
     
-    CPFSGT refTempREG, 0
+NOTEQUAL:
+    CPFSGT refTempREG,0
+    GOTO   LED_COOL
     GOTO   LED_HOT
     
-    CPFSLT refTempREG, 0
-    GOTO   LED_COOL
-
+    
     
 LED_HOT:
     BSF     HEATER, 1 ; Set PORTD,2 (Heater LED)

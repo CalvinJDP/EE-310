@@ -18,7 +18,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>TempControl.asm</itemPath>
+      <itemPath>Main.asm</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

@@ -1,0 +1,167 @@
+[p GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F46K42 ]
+[d frameptr 16353 ]
+"7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"90 C:\Users\Calvin\OneDrive\Documents\School\EE\EE 310\GitHub\Projects\Calculator.X\newmain.c
+[v _buttonPress buttonPress `(i  1 e 2 0 ]
+"182
+[v _CCCC CCCC `(i  1 e 2 0 ]
+"197
+[v _AAAA AAAA `(i  1 e 2 0 ]
+"212
+[v _BBBB BBBB `(i  1 e 2 0 ]
+"230
+[v _main main `(v  1 e 1 0 ]
+"8017 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18F-K_DFP/1.13.292/xc8\pic\include\proc\pic18f46k42.h
+[v _ANSELA ANSELA `VEuc  1 e 1 @14912 ]
+"9473
+[v _ANSELC ANSELC `VEuc  1 e 1 @14944 ]
+"10309
+[v _ANSELD ANSELD `VEuc  1 e 1 @14960 ]
+"46592
+[v _LATA LATA `VEuc  1 e 1 @16314 ]
+"46816
+[v _LATC LATC `VEuc  1 e 1 @16316 ]
+"46928
+[v _LATD LATD `VEuc  1 e 1 @16317 ]
+"47092
+[v _TRISA TRISA `VEuc  1 e 1 @16322 ]
+"47216
+[v _TRISC TRISC `VEuc  1 e 1 @16324 ]
+"47278
+[v _TRISD TRISD `VEuc  1 e 1 @16325 ]
+"47372
+[v _PORTA PORTA `VEuc  1 e 1 @16330 ]
+[s S45 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+"47389
+[u S54 . 1 `S45 1 . 1 0 ]
+"47389
+"47389
+[v _PORTAbits PORTAbits `VES54  1 e 1 @16330 ]
+"47496
+[v _PORTC PORTC `VEuc  1 e 1 @16332 ]
+[s S24 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 RC3 1 0 :1:3 
+`uc 1 RC4 1 0 :1:4 
+`uc 1 RC5 1 0 :1:5 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+"47513
+[u S33 . 1 `S24 1 . 1 0 ]
+"47513
+"47513
+[v _PORTCbits PORTCbits `VES33  1 e 1 @16332 ]
+"47558
+[v _PORTD PORTD `VEuc  1 e 1 @16333 ]
+[s S67 . 1 `uc 1 RD0 1 0 :1:0 
+`uc 1 RD1 1 0 :1:1 
+`uc 1 RD2 1 0 :1:2 
+`uc 1 RD3 1 0 :1:3 
+`uc 1 RD4 1 0 :1:4 
+`uc 1 RD5 1 0 :1:5 
+`uc 1 RD6 1 0 :1:6 
+`uc 1 RD7 1 0 :1:7 
+]
+"47575
+[u S76 . 1 `S67 1 . 1 0 ]
+"47575
+"47575
+[v _PORTDbits PORTDbits `VES76  1 e 1 @16333 ]
+"85 C:\Users\Calvin\OneDrive\Documents\School\EE\EE 310\GitHub\Projects\Calculator.X\newmain.c
+[v _a a `i  1 e 2 0 ]
+"86
+[v _b b `i  1 e 2 0 ]
+"87
+[v _c c `i  1 e 2 0 ]
+"88
+[v _s s `i  1 e 2 0 ]
+"230
+[v _main main `(v  1 e 1 0 ]
+{
+"250
+[v main@sharp sharp `i  1 a 2 10 ]
+"299
+} 0
+"15 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 4 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
+"53
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 6 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 5 ]
+[v ___awdiv@counter counter `uc  1 a 1 4 ]
+"7
+[v ___awdiv@dividend dividend `i  1 p 2 0 ]
+[v ___awdiv@divisor divisor `i  1 p 2 2 ]
+"41
+} 0
+"182 C:\Users\Calvin\OneDrive\Documents\School\EE\EE 310\GitHub\Projects\Calculator.X\newmain.c
+[v _CCCC CCCC `(i  1 e 2 0 ]
+{
+"195
+} 0
+"212
+[v _BBBB BBBB `(i  1 e 2 0 ]
+{
+"228
+} 0
+"197
+[v _AAAA AAAA `(i  1 e 2 0 ]
+{
+"210
+} 0
+"90
+[v _buttonPress buttonPress `(i  1 e 2 0 ]
+{
+"176
+} 0

@@ -98,7 +98,7 @@ float voltage; // hold the analog value (volt))
 char data[10];
 void setupPorts(void);
 int conv();
-void scanKeypad(void);
+int scanKeypad();
 void error();
 int countA = 0;
 int countB = 0;
@@ -126,32 +126,34 @@ void main() {
         ADPCH = 0x04;
         prB = conv();
         
-        scanKeypad();
+        pressedKey = scanKeypad();
         
         if (pressedKey == 10) {
             temp = 1;
             HCode = -1;
             LCode = -1;
             PORTCbits.RC3 = 0;
-            __delay_ms(500);
+            //__delay_ms(1000);
             PORTCbits.RC3 = 1;
+            //__delay_ms(1000);
+            PORTCbits.RC3 = 0;
             
             while (temp == 1) {
-                scanKeypad();
-                if (pressedKey > -1) {
-                    pressedKey = HCode;
+                pressedKey = scanKeypad();
+                if (pressedKey > -1 && pressedKey < 10) {
+                    HCode = pressedKey;
                     uint8_t pattern = segmentPatterns[HCode]; 
                     PORTD = pattern;
-                    __delay_ms(500);
+                    //__delay_ms(2000);
                     PORTD = 0x00;
                     
                     
                 }
-                if (HCode > -1 && pressedKey > -1) {
-                    pressedKey = LCode;
+                if (HCode > -1 && pressedKey > -1 && pressedKey < 10) {
+                    LCode = pressedKey;
                     uint8_t pattern = segmentPatterns[LCode]; 
                     PORTD = pattern;
-                    __delay_ms(500);
+                    //__delay_ms(2000);
                     PORTD = 0x00;
                     temp = 0;
                 }
@@ -253,7 +255,7 @@ void setupPorts(void)
     ANSELC = 0x00;
     PORTC = 0x0C;
     
-    TRISA = 0x03;
+    
     
     TRISB = 0x0F;
     ANSELB = 0x00;
@@ -289,38 +291,94 @@ void setupPorts(void)
 }
 
 
-void scanKeypad(void) {
-    const int keypadLayout[4][3] = {
-        {1, 2, 3}, // Row 0, Column 0-2
-        {4, 5, 6}, // Row 1, Column 0-2
-        {7, 8, 9}, // Row 2, Column 0-2
-        {10, 0, 11}  // Row 3, Column 0-2
-    };
-
-    // Setup Ports
-    TRISB = 0x07; // RB0-RB2 as inputs, RB3-RB5 as outputs
-    TRISA = 0x0F; // RA0-RA3 as inputs
-    PORTB = 0x00; // Initialize port B to 0
-
-    // Scan columns (RB3-RB5)
-    for (int col = 0; col < 3; col++) {
-        PORTB = (0b00001000 << col); // Activate one column at a time
-        __delay_ms(5); // Wait for signals to stabilize
-
-        // Check rows (RB0-RB2) for pressed keys
-        for (int row = 0; row < 4; row++) {
-            if (PORTBbits.RB0 == 0 && PORTBbits.RB1 == 0 && PORTBbits.RB2 == 0) {
-                // No keys pressed in this column
-                continue;
-            }
-
-            // Key pressed, decode the key
-            int pressedKey = keypadLayout[row][col];
-            // Convert the pressedKey to an integer and return
-            
-        }
-    }
-
-    // No key pressed
+// Function to scan the keypad and store the pressed key in the provided integer variable
+int scanKeypad() {
+    PORTBbits.RB4 = 1;
     
+    if (PORTBbits.RB0 == 1) {
+        return 1;
+        
+    }
+    if (PORTBbits.RB1 == 1) {
+        return 4;
+    }  
+    
+    if (PORTBbits.RB2 == 1) {
+        return 7;
+    }
+    
+    if (PORTBbits.RB3 == 1) {
+        return 10;
+    }
+    PORTBbits.RB4 = 0;
+    
+    
+    
+    PORTBbits.RB5 = 1;
+    if (PORTBbits.RB0 == 1) {
+        return 2;
+        
+    }
+    if (PORTBbits.RB1 == 1) {
+        return 5;
+    }  
+    
+    if (PORTBbits.RB2 == 1) {
+        return 8;
+    }
+    
+    if (PORTBbits.RB3 == 1) {
+        return 0;
+    }
+    PORTBbits.RB5 = 0;
+    
+    
+    
+    
+    
+    
+    
+    PORTAbits.RA0 = 1;
+    if (PORTBbits.RB0 == 1) {
+        return 3;
+        
+    }
+    if (PORTBbits.RB1 == 1) {
+        return 6;
+    }  
+    
+    if (PORTBbits.RB2 == 1) {
+        return 9;
+    }
+    
+    if (PORTBbits.RB3 == 1) {
+        return 11;
+    }
+    PORTAbits.RA0 = 0;
+    
+    
+    
+    
+    
+    
+    PORTAbits.RA1 = 1;
+    if (PORTBbits.RB0 == 1) {
+        return 12;
+        
+    }
+    if (PORTBbits.RB1 == 1) {
+        return 13;
+    }  
+    
+    if (PORTBbits.RB2 == 1) {
+        return 14;
+    }
+    
+    if (PORTBbits.RB3 == 1) {
+        return 15;
+    }
+    PORTAbits.RA1 = 0;
+    
+    return -1;
+
 }

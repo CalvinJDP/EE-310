@@ -133,19 +133,20 @@ void main() {
             HCode = -1;
             LCode = -1;
             PORTCbits.RC3 = 0;
-            //__delay_ms(1000);
+            __delay_ms(1000);
             PORTCbits.RC3 = 1;
-            //__delay_ms(1000);
+            __delay_ms(1000);
             PORTCbits.RC3 = 0;
             
             while (temp == 1) {
                 pressedKey = scanKeypad();
-                if (pressedKey > -1 && pressedKey < 10) {
+                if (pressedKey > -1 && pressedKey < 10 && HCode == -1) {
                     HCode = pressedKey;
                     uint8_t pattern = segmentPatterns[HCode]; 
                     PORTD = pattern;
-                    //__delay_ms(2000);
+                    __delay_ms(2000);
                     PORTD = 0x00;
+                    pressedKey = -1;
                     
                     
                 }
@@ -153,8 +154,9 @@ void main() {
                     LCode = pressedKey;
                     uint8_t pattern = segmentPatterns[LCode]; 
                     PORTD = pattern;
-                    //__delay_ms(2000);
+                    __delay_ms(2000);
                     PORTD = 0x00;
+                    pressedKey = -1;
                     temp = 0;
                 }
             }
